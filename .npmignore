@@ -1,0 +1,7 @@
+node_modules/
+lib/
+.github/
+__tests__/
+coverage/
+jest.config.js
+.gitpod.*
