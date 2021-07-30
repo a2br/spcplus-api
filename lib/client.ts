@@ -3,6 +3,7 @@ import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
 import { getClubs } from "./api/clubs";
 import { settings } from "./util/settings";
 
+//TODO Manage auth cycle by itself
 export default class Client {
 	constructor(public settings: settings) {}
 
