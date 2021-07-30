@@ -1,7 +1,7 @@
 import { Response } from "node-fetch";
 import Client from "../client";
 import { req } from "../util/http";
-import { ErrorRes } from "./error";
+import { Res } from "./error";
 
 export async function login(
 	usr: string,
@@ -18,7 +18,7 @@ export async function login(
 	return [json, res];
 }
 
-type LoginRes = LoginResSuccess | ErrorRes;
+type LoginRes = Res<LoginResSuccess>;
 
 type LoginResSuccess = {
 	welcome: boolean | undefined;
@@ -70,7 +70,7 @@ export type Token = {
 	name: string;
 };
 
-export type TokensRes = TokensResSuccess | ErrorRes;
+export type TokensRes = Res<TokensResSuccess>;
 
 export type TokensResSuccess = {
 	tokens: Token[];

@@ -1,7 +1,7 @@
 import { Response } from "node-fetch";
 import Client from "../client";
 import { req } from "../util/http";
-import { ErrorRes } from "./error";
+import { Res } from "./error";
 
 export async function getMenu(
 	c: Client,
@@ -36,7 +36,7 @@ export type Menu = {
 	days: { name: string; meals: Food[] }[];
 };
 
-export type MenuRes = MenuResSuccess | ErrorRes;
+export type MenuRes = Res<MenuResSuccess>;
 
 export type MenuResSuccess = {
 	menu: Menu;

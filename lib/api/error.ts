@@ -3,3 +3,5 @@ export type ErrorRes = {
 	message?: string;
 	origin?: "EcoleDirecte";
 };
+
+export type Res<T> = T | ErrorRes;

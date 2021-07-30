@@ -1,7 +1,7 @@
 import { Response } from "node-fetch";
 import Client from "../client";
 import { req } from "../util/http";
-import { ErrorRes } from "./error";
+import { Res } from "./error";
 
 export type Club = {
 	createdAt: Date;
@@ -28,7 +28,7 @@ interface Person {
 type ClubsResSuccess = {
 	clubs: Club[];
 };
-type ClubsRes = ClubsResSuccess | ErrorRes;
+type ClubsRes = Res<ClubsResSuccess>;
 
 export async function getClubs(
 	c: Client
