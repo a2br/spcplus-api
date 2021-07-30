@@ -15,10 +15,10 @@ export async function req(
 	const res = await fetch(url, {
 		method,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		body: body as any,
+		body: JSON.stringify(body),
 		headers: {
+			"Content-Type": "application/json",
 			"User-Agent": c.settings.userAgent,
-			...c.settings._addedHeaders,
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} as any,
 	});
