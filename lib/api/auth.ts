@@ -8,17 +8,17 @@ export async function login(
 	pwd: string,
 	c: Client,
 	save = false
-): Promise<[body: LoginResponse, res: Response]> {
+): Promise<[body: LoginRes, res: Response]> {
 	const res = await req("POST", "/auth/login", c, {
 		username: usr,
 		password: pwd,
 		save: save,
 	});
-	const json: LoginResponse = await res.json();
+	const json: LoginRes = await res.json();
 	return [json, res];
 }
 
-type LoginResponse = LoginResSuccess | ErrorRes;
+type LoginRes = LoginResSuccess | ErrorRes;
 
 type LoginResSuccess = {
 	welcome: boolean | undefined;
@@ -51,4 +51,38 @@ export function logout(c: Client) {
 
 export function refresh(c: Client) {
 	return req("POST", "/auth/refresh", c);
+}
+
+export async function getTokens(
+	c: Client
+): Promise<[body: TokensRes, res: Response]> {
+	const res = await req("GET", "/auth/tokens", c);
+	const json: TokensRes = await res.json();
+	return [json, res];
+}
+
+export type Token = {
+	_id: string;
+	iat: Date;
+	exp: Date;
+	userAgent?: string | undefined;
+	lastUsed: Date;
+	name: string;
+};
+
+export type TokensRes = TokensResSuccess | ErrorRes;
+
+export type TokensResSuccess = {
+	tokens: Token[];
+};
+
+export async function delTokens(
+	c: Client,
+	tokenIds: string[]
+): Promise<[body: TokensRes, res: Response]> {
+	const res = await req("DELETE", "/auth/tokens", c, {
+		targets: tokenIds,
+	});
+	const json: TokensRes = await res.json();
+	return [json, res];
 }

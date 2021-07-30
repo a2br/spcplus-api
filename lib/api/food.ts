@@ -1,0 +1,43 @@
+import { Response } from "node-fetch";
+import Client from "../client";
+import { req } from "../util/http";
+import { ErrorRes } from "./error";
+
+export async function getMenu(
+	c: Client,
+	date?: Date
+): Promise<[body: MenuRes, res: Response]> {
+	const res = await req(
+		"GET",
+		"/menu" + (date ? `?d=${date.getTime()}` : ""),
+		c
+	);
+	const json: MenuRes = await res.json();
+	return [json, res];
+}
+
+interface FoodDoc {
+	name: string;
+	fragments: Array<{
+		start: number;
+		end: number;
+		mealId: string;
+	}>;
+}
+
+export type Food = FoodDoc | null;
+
+export type Menu = {
+	_id: string;
+	time: Date;
+	weekFrom: Date;
+	weekTo: Date;
+	supplements: Food;
+	days: { name: string; meals: Food[] }[];
+};
+
+export type MenuRes = MenuResSuccess | ErrorRes;
+
+export type MenuResSuccess = {
+	menu: Menu;
+};

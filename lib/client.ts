@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import fetch from "node-fetch";
-import { login, logout, refresh } from "./api/auth";
+import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
+import { getClubs } from "./api/clubs";
 import { settings } from "./util/settings";
 
 export default class Client {
@@ -11,6 +12,12 @@ export default class Client {
 	}
 	logout() {
 		return logout(this);
+	}
+	getTokens() {
+		return getTokens(this);
+	}
+	delTokens(tokenIds: string[]) {
+		return delTokens(this, tokenIds);
 	}
 	_refreshToken() {
 		return refresh(this);
@@ -25,5 +32,7 @@ export default class Client {
 	async getMenu() {}
 	async getMenus() {}
 
-	async getClubs() {}
+	getClubs() {
+		return getClubs(this);
+	}
 }
