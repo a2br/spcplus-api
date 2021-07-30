@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import fetch from "node-fetch";
 import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
 import { getClubs } from "./api/clubs";
 import { settings } from "./util/settings";
