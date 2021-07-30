@@ -1,4 +1,3 @@
-import { Response } from "node-fetch";
 import Client from "../client";
 import { req } from "../util/http";
 import { Res } from "./error";

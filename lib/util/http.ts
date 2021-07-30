@@ -1,4 +1,3 @@
-import fetch, { Response } from "node-fetch";
 import Client from "../client";
 import { settings } from "./settings";
 
@@ -12,7 +11,8 @@ export async function req(
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<Response> {
 	const url = c.settings.root + path;
-	const res = await fetch(url, {
+
+	const res = await window.fetch(url, {
 		method,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		body: JSON.stringify(body),
