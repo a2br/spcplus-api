@@ -11,14 +11,13 @@ export async function req(
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<Response> {
 	const url = c.settings.root + path;
-
 	const res = await window.fetch(url, {
 		method,
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		body: JSON.stringify(body),
 		headers: {
 			"Content-Type": "application/json",
-			"User-Agent": c.settings.userAgent,
+			"User-Agent": c.settings.userAgent || navigator.userAgent,
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} as any,
 	});
