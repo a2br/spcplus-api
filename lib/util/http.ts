@@ -1,5 +1,4 @@
 import Client from "../client";
-import { settings } from "./settings";
 
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
