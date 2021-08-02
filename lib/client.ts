@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
 import { getClubs } from "./api/clubs";
+import { getMenu } from "./api/food";
 import { settings } from "./util/settings";
 
 //TODO Manage auth cycle by itself
@@ -29,8 +30,9 @@ export default class Client {
 	async getGroups() {}
 	async getInvite() {}
 
-	async getMenu() {}
-	async getMenus() {}
+	getMenu(date?: Date) {
+		return getMenu(this, date);
+	}
 
 	getClubs() {
 		return getClubs(this);
