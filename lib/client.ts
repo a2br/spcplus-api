@@ -4,8 +4,6 @@ import { getClubs } from "./api/clubs";
 import { getMenu } from "./api/food";
 import { getUser, searchUsers } from "./api/users";
 import { settings } from "./util/settings";
-
-//TODO Manage auth cycle by itself
 export default class Client {
 	constructor(public settings: settings) {}
 

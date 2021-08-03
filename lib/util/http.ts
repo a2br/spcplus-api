@@ -20,5 +20,9 @@ export async function req(
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} as any,
 	});
+	if (res.status === 401 && path !== "/login") {
+		await c._refreshToken();
+		return req(method, path, c, body);
+	}
 	return res;
 }
