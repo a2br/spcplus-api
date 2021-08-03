@@ -1,4 +1,5 @@
 import Client from "../client";
+import events from "../events";
 
 export type WithRes<T> = [body: T, res: Response];
 
@@ -8,7 +9,8 @@ export async function req(
 	method: Method,
 	path: string,
 	c: Client,
-	body?: Record<string, unknown>
+	body?: Record<string, unknown>,
+	refreshed = false
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<Response> {
 	const url = c.settings.root + path;
@@ -22,9 +24,23 @@ export async function req(
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} as any,
 	});
-	if (res.status === 401 && path !== "/auth/login") {
-		await c._refreshToken();
-		return req(method, path, c, body);
+	if (
+		res.status === 401 &&
+		path !== "/auth/login" &&
+		path !== "/auth/refresh"
+	) {
+		if (!refreshed) {
+			await c._refreshToken();
+			return req(method, path, c, body, true);
+		} else {
+			// Emit the fact that user is logged out
+			console.log(
+				"for path",
+				path,
+				"auth failed and already refreshed, emitting"
+			);
+			events.emit("unauthorized");
+		}
 	}
 	return res;
 }
