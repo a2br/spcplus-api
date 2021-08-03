@@ -1,5 +1,5 @@
 import Client from "../client";
-import { req } from "../util/http";
+import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export type Club = {
@@ -29,9 +29,7 @@ type ClubsResSuccess = {
 };
 type ClubsRes = Res<ClubsResSuccess>;
 
-export async function getClubs(
-	c: Client
-): Promise<[body: ClubsRes, res: Response]> {
+export async function getClubs(c: Client): Promise<WithRes<ClubsRes>> {
 	const res = await req("GET", "/clubs", c);
 	const json: ClubsRes = await res.json();
 	return [json, res];

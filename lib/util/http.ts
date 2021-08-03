@@ -1,5 +1,7 @@
 import Client from "../client";
 
+export type WithRes<T> = [body: T, res: Response];
+
 type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 
 export async function req(

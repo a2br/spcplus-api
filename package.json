@@ -40,6 +40,7 @@
 	},
 	"dependencies": {
 		"ecoledirecte-api-types": "^0.10.0",
+		"ecoledirecte.js": "^0.27.0",
 		"node-fetch": "^2.6.1"
 	}
 }

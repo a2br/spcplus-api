@@ -1,11 +1,11 @@
 import Client from "../client";
-import { req } from "../util/http";
+import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export async function getMenu(
 	c: Client,
 	date?: Date
-): Promise<[body: MenuRes, res: Response]> {
+): Promise<WithRes<MenuRes>> {
 	const res = await req(
 		"GET",
 		"/menu" + (date ? `?d=${date.getTime()}` : ""),

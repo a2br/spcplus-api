@@ -1,6 +1,6 @@
 import { studentAccount } from "ecoledirecte-api-types";
 import Client from "../client";
-import { req } from "../util/http";
+import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 type Self = {
@@ -48,7 +48,7 @@ type UsersSearchSuccess = { users: Other[] };
 export async function getUser<id extends number | undefined>(
 	c: Client,
 	edId?: id
-): Promise<[body: UserRes<id>, res: Response]> {
+): Promise<WithRes<UserRes<id>>> {
 	const path = `/users/${edId ?? "self"}`;
 	const res = await req("GET", path, c);
 	const body: UserRes<id> = await res.json();
@@ -58,7 +58,7 @@ export async function getUser<id extends number | undefined>(
 export async function searchUsers(
 	c: Client,
 	query: string
-): Promise<[body: SearchRes, res: Response]> {
+): Promise<WithRes<SearchRes>> {
 	const url = new URL("/users/search");
 	url.searchParams.set("q", query);
 	const path = url.href;
