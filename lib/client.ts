@@ -2,6 +2,7 @@
 import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
 import { getClubs } from "./api/clubs";
 import { getMenu } from "./api/food";
+import { getSnapshots, takeSnapshot } from "./api/grades";
 import { getUser, searchUsers } from "./api/users";
 import { settings } from "./util/settings";
 export default class Client {
@@ -30,8 +31,12 @@ export default class Client {
 		return searchUsers(this, query);
 	}
 
-	async takeSnapshot() {}
-	async getSnapshots() {}
+	async takeSnapshot() {
+		return takeSnapshot(this);
+	}
+	async getSnapshots(limit?: number) {
+		return getSnapshots(this, limit);
+	}
 	async getGroup() {}
 	async getGroups() {}
 	async getInvite() {}
