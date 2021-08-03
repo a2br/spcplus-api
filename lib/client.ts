@@ -37,8 +37,8 @@ export default class Client {
 	async getSnapshots(limit?: number) {
 		return getSnapshots(this, limit);
 	}
-	async getGroup() {}
 	async getGroups() {}
+	async getGroup() {}
 	async getInvite() {}
 
 	getMenu(date?: Date) {
