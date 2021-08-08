@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
 import { getClubs } from "./api/clubs";
-import { getMenu } from "./api/food";
+import { getMeals, getMenu } from "./api/food";
 import { getSnapshots, takeSnapshot } from "./api/grades";
 import { getUser, searchUsers } from "./api/users";
 import { settings } from "./util/settings";
@@ -43,6 +43,9 @@ export default class Client {
 
 	getMenu(date?: Date) {
 		return getMenu(this, date);
+	}
+	getMeals() {
+		return getMeals(this);
 	}
 
 	getClubs() {

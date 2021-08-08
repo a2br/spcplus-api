@@ -6,16 +6,14 @@ export async function getMenu(
 	c: Client,
 	date?: Date
 ): Promise<WithRes<MenuRes>> {
-	const res = await req(
-		"GET",
-		"/menu" + (date ? `?d=${date.getTime()}` : ""),
-		c
-	);
+	const url = new URL("/menu");
+	if (date) url.searchParams.set("d", date.toISOString());
+	const res = await req("GET", url.pathname, c);
 	const json: MenuRes = await res.json();
 	return [json, res];
 }
 
-interface FoodDoc {
+export interface FoodDoc {
 	name: string;
 	fragments: Array<{
 		start: number;
@@ -39,4 +37,26 @@ export type MenuRes = Res<MenuResSuccess>;
 
 export type MenuResSuccess = {
 	menu: Menu;
+};
+
+export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
+	const url = new URL("/menu/meals");
+	const res = await req("GET", url.pathname, c);
+	const body: MealsRes = await res.json();
+	return [body, res];
+}
+
+export type Meal = {
+	id: string;
+	name: string;
+	aliases: string[];
+	ratings: [number, number, number, number, number];
+	average: number | null;
+	rating: number | null;
+};
+
+export type MealsRes = Res<MealsResSuccess>;
+
+export type MealsResSuccess = {
+	meals: Meal[];
 };
