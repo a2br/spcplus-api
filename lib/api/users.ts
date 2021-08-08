@@ -59,9 +59,10 @@ export async function searchUsers(
 	c: Client,
 	query: string
 ): Promise<WithRes<SearchRes>> {
-	const url = new URL("/users/search");
-	url.searchParams.set("q", query);
-	const path = url.href;
+	let path = "/users/search";
+	const params = new URLSearchParams();
+	params.set("q", query);
+	path += "?" + params.toString();
 	const res = await req("GET", path, c);
 	const body: SearchRes = await res.json();
 	return [body, res];

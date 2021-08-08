@@ -55,10 +55,14 @@ export async function getSnapshots(
 	c: Client,
 	limit?: number
 ): Promise<WithRes<GradesRes>> {
-	const url = new URL("/path");
-	if (limit) url.searchParams.set("limit", limit.toString());
-	const path = url.pathname;
-	const res = await req("GET", path, c);
+	let url = "/grades";
+	const params = new URLSearchParams();
+
+	if (limit) {
+		params.set("limit", limit.toString());
+		url += "?" + params.toString();
+	}
+	const res = await req("GET", url, c);
 	const body: GradesRes = await res.json();
 	return [body, res];
 }

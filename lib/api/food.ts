@@ -6,9 +6,13 @@ export async function getMenu(
 	c: Client,
 	date?: Date
 ): Promise<WithRes<MenuRes>> {
-	const url = new URL("/menu");
-	if (date) url.searchParams.set("d", date.toISOString());
-	const res = await req("GET", url.pathname, c);
+	let url = "/menu";
+	const params = new URLSearchParams();
+	if (date) {
+		params.set("d", date.toISOString());
+		url += "?" + params.toString();
+	}
+	const res = await req("GET", url, c);
 	const json: MenuRes = await res.json();
 	return [json, res];
 }
@@ -40,8 +44,8 @@ export type MenuResSuccess = {
 };
 
 export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
-	const url = new URL("/menu/meals");
-	const res = await req("GET", url.pathname, c);
+	const url = "/menu/meals";
+	const res = await req("GET", url, c);
 	const body: MealsRes = await res.json();
 	return [body, res];
 }
