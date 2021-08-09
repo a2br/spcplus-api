@@ -18,13 +18,13 @@ export type Club = {
 	color?: string;
 };
 type Time = string /* `${Day}${Hour}${Minute}` */;
-type Meeting = [from: Time, to: Time];
+export type Meeting = [from: Time, to: Time];
 type Question = [question: string, answer: string];
-interface Person {
+export interface Person {
 	name: string;
 	edId?: number;
 }
-type ClubsResSuccess = {
+export type ClubsResSuccess = {
 	clubs: Club[];
 };
 type ClubsRes = Res<ClubsResSuccess>;

@@ -4,4 +4,5 @@ export default Client;
 import events from "./events";
 export { events };
 
-//TODO EXPORT ALL TYPES
+export * from "./api";
+export * from "./util";

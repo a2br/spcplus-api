@@ -4,9 +4,9 @@ import Client from "../client";
 import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
-type GradeDoc = gradeJson; //& {};
+export type GradeDoc = gradeJson; //& {};
 
-type PeriodDocStats = periodJson & {
+export type PeriodDocStats = periodJson & {
 	stats: {
 		weightedAvg: number | null;
 		classAvg: number | null;
@@ -14,7 +14,7 @@ type PeriodDocStats = periodJson & {
 	subjects: SubjectDocStats[];
 };
 
-type SubjectDocStats = subjectJson & {
+export type SubjectDocStats = subjectJson & {
 	stats: {
 		weightedAvg: number | null;
 		classAvg: number | null;
@@ -30,7 +30,7 @@ export type PeriodLite = Omit<
 	"_raw"
 >;
 
-interface Snapshot {
+export interface Snapshot {
 	firstSeenAt: Date;
 	lastSeenAt: Date;
 	dates: Date[];

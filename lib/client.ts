@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { delTokens, getTokens, login, logout, refresh } from "./api/auth";
-import { getClubs } from "./api/clubs";
-import { getMeals, getMenu } from "./api/food";
-import { getSnapshots, takeSnapshot } from "./api/grades";
-import { getUser, searchUsers } from "./api/users";
-import { settings } from "./util/settings";
+import { delTokens, getTokens, login, logout, refresh } from "./api";
+import { getClubs } from "./api";
+import { getMeals, getMenu } from "./api";
+import { getSnapshots, takeSnapshot } from "./api";
+import { getUser, searchUsers } from "./api";
+import { settings } from "./util";
+
 export default class Client {
 	constructor(public settings: settings) {}
 

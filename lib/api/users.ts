@@ -3,7 +3,7 @@ import Client from "../client";
 import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
-type Self = {
+export type Self = {
 	_id: string;
 	createdAt: Date;
 	lastSyncedAt: Date;
@@ -26,24 +26,24 @@ type Self = {
 	_raw: studentAccount;
 };
 
-type Other = {
+export type Other = {
 	id: number;
 	username: string;
 	firstname: string;
 	lastname: string;
 };
 
-type UserRes<id extends number | undefined> = undefined extends id
+export type UserRes<id extends number | undefined> = undefined extends id
 	? SelfRes
 	: OtherRes;
 
-type SelfRes = Res<SelfResSuccess>;
-type OtherRes = Res<OtherResSuccess>;
-type SearchRes = Res<UsersSearchSuccess>;
+export type SelfRes = Res<SelfResSuccess>;
+export type OtherRes = Res<OtherResSuccess>;
+export type SearchRes = Res<UsersSearchSuccess>;
 
-type SelfResSuccess = { user: Self };
-type OtherResSuccess = { user: Other };
-type UsersSearchSuccess = { users: Other[] };
+export type SelfResSuccess = { user: Self };
+export type OtherResSuccess = { user: Other };
+export type UsersSearchSuccess = { users: Other[] };
 
 export async function getUser<id extends number | undefined>(
 	c: Client,

@@ -6,7 +6,7 @@ export interface settings {
 
 export class Settings {
 	constructor(public settings: settings) {}
-	set<K extends keyof settings, V extends settings[K]>(key: K, value: V) {
+	set<K extends keyof settings, V extends settings[K]>(key: K, value: V): void {
 		this.settings[key] = value;
 	}
 	get<K extends keyof settings, V extends settings[K]>(key: K): V {

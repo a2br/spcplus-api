@@ -17,9 +17,9 @@ export async function login(
 	return [json, res];
 }
 
-type LoginRes = Res<LoginResSuccess>;
+export type LoginRes = Res<LoginResSuccess>;
 
-type LoginResSuccess = {
+export type LoginResSuccess = {
 	welcome: boolean | undefined;
 	refreshToken: string;
 	accessToken: string;
