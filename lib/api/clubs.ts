@@ -3,6 +3,7 @@ import { req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export type Club = {
+	_id: string;
 	createdAt: Date;
 	name: string;
 	shortName: string;
