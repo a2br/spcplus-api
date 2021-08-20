@@ -51,7 +51,7 @@ export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
 }
 
 export type Meal = {
-	id: string;
+	_id: string;
 	name: string;
 	aliases: string[];
 	ratings: [number, number, number, number, number];

@@ -31,6 +31,7 @@ export type PeriodLite = Omit<
 >;
 
 export interface Snapshot {
+	_id: string;
 	firstSeenAt: Date;
 	lastSeenAt: Date;
 	dates: Date[];
@@ -41,8 +42,6 @@ export interface Snapshot {
 	periods: Array<PeriodLite>;
 
 	res: gradesResData;
-
-	calcAvg(subjects?: string[]): number | null;
 }
 
 export type GradesRes = Res<GradesResSuccess>;
