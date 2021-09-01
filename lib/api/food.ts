@@ -41,6 +41,7 @@ export type MenuRes = Res<MenuResSuccess>;
 
 export type MenuResSuccess = {
 	menu: Menu;
+	meals: Meal[];
 };
 
 export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
