@@ -55,6 +55,13 @@ export async function getUser<id extends number | undefined>(
 	return [body, res];
 }
 
+export async function getUserPicture(c: Client, edId: number): Promise<void> {
+	const path = `/media/users/${edId}`;
+	const res = await req("GET", path, c);
+	const body = await res.text();
+	console.log(body);
+}
+
 export async function searchUsers(
 	c: Client,
 	query: string

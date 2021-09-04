@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { delTokens, getTokens, login, logout, refresh } from "./api";
+import {
+	delTokens,
+	getTokens,
+	getUserPicture,
+	login,
+	logout,
+	refresh,
+} from "./api";
 import { getClubs } from "./api";
 import { getMeals, getMenu } from "./api";
 import { getSnapshots, takeSnapshot } from "./api";
@@ -27,6 +34,9 @@ export default class Client {
 
 	getUser(edId?: number) {
 		return getUser(this, edId);
+	}
+	getUserPicture(edId: number) {
+		return getUserPicture(this, edId);
 	}
 	searchUsers(query: string) {
 		return searchUsers(this, query);

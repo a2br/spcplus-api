@@ -23,6 +23,7 @@ export async function req(
 			"User-Agent": c.settings.userAgent || navigator.userAgent,
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		} as any,
+		credentials: "include",
 	});
 	if (
 		res.status === 401 &&
@@ -34,11 +35,6 @@ export async function req(
 			return req(method, path, c, body, true);
 		} else {
 			// Emit the fact that user is logged out
-			console.log(
-				"for path",
-				path,
-				"auth failed and already refreshed, emitting"
-			);
 			events.emit("unauthorized");
 		}
 	}
