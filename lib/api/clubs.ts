@@ -1,5 +1,5 @@
 import Client from "../client";
-import { req, WithRes } from "../util/http";
+import { parseJSON, req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export type Club = {
@@ -32,6 +32,7 @@ type ClubsRes = Res<ClubsResSuccess>;
 
 export async function getClubs(c: Client): Promise<WithRes<ClubsRes>> {
 	const res = await req("GET", "/clubs", c);
-	const json: ClubsRes = await res.json();
+	const text = await res.text();
+	const json: ClubsRes = parseJSON(text);
 	return [json, res];
 }

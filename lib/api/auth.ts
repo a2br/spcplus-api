@@ -1,5 +1,5 @@
 import Client from "../client";
-import { req, WithRes } from "../util/http";
+import { parseJSON, req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export async function login(
@@ -13,7 +13,8 @@ export async function login(
 		password: pwd,
 		save: save,
 	});
-	const json: LoginRes = await res.json();
+	const text = await res.text();
+	const json: LoginRes = parseJSON(text);
 	return [json, res];
 }
 
@@ -54,7 +55,8 @@ export function refresh(c: Client) {
 
 export async function getTokens(c: Client): Promise<WithRes<TokensRes>> {
 	const res = await req("GET", "/auth/tokens", c);
-	const json: TokensRes = await res.json();
+	const text = await res.text();
+	const json: TokensRes = parseJSON(text);
 	return [json, res];
 }
 
@@ -80,6 +82,7 @@ export async function delTokens(
 	const res = await req("DELETE", "/auth/tokens", c, {
 		targets: tokenIds,
 	});
-	const json: TokensRes = await res.json();
+	const text = await res.text();
+	const json: TokensRes = parseJSON(text);
 	return [json, res];
 }

@@ -1,5 +1,5 @@
 import Client from "../client";
-import { req, WithRes } from "../util/http";
+import { parseJSON, req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export async function getMenu(
@@ -13,7 +13,8 @@ export async function getMenu(
 		url += "?" + params.toString();
 	}
 	const res = await req("GET", url, c);
-	const json: MenuRes = await res.json();
+	const text = await res.text();
+	const json: MenuRes = parseJSON(text);
 	return [json, res];
 }
 
@@ -47,7 +48,8 @@ export type MenuResSuccess = {
 export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
 	const url = "/menu/meals";
 	const res = await req("GET", url, c);
-	const body: MealsRes = await res.json();
+	const text = await res.text();
+	const body: MealsRes = parseJSON(text);
 	return [body, res];
 }
 

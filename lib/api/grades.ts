@@ -1,7 +1,7 @@
 import { gradesResData } from "ecoledirecte-api-types";
 import { gradeJson, periodJson, subjectJson } from "ecoledirecte.js";
 import Client from "../client";
-import { req, WithRes } from "../util/http";
+import { parseJSON, req, WithRes } from "../util/http";
 import { Res } from "./error";
 
 export type GradeDoc = gradeJson; //& {};
@@ -62,12 +62,14 @@ export async function getSnapshots(
 		url += "?" + params.toString();
 	}
 	const res = await req("GET", url, c);
-	const body: GradesRes = await res.json();
+	const text = await res.text();
+	const body: GradesRes = parseJSON(text);
 	return [body, res];
 }
 
 export async function takeSnapshot(c: Client): Promise<WithRes<GradeRes>> {
 	const res = await req("POST", "/grades", c);
-	const body: GradeRes = await res.json();
+	const text = await res.text();
+	const body: GradeRes = parseJSON(text);
 	return [body, res];
 }
