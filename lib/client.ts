@@ -32,7 +32,7 @@ export default class Client {
 		return refresh(this);
 	}
 
-	getUser(edId?: number) {
+	getUser<id extends number | undefined>(edId: id) {
 		return getUser(this, edId);
 	}
 	getUserPicture(edId: number) {
