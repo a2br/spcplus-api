@@ -27,7 +27,7 @@ export type Self = {
 };
 
 export type Other = {
-	id: number;
+	_id: number;
 	username: string;
 	firstname: string;
 	lastname: string;
