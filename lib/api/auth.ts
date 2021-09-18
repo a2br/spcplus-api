@@ -1,24 +1,26 @@
+import { studentAccount } from "ecoledirecte-api-types";
 import Client from "../client";
 import { parseJSON, req, WithRes } from "../util/http";
 import { Res } from "./error";
 
-export async function login(
+export async function login<S extends boolean>(
 	usr: string,
 	pwd: string,
 	c: Client,
-	save = false
-): Promise<WithRes<LoginRes>> {
+	save: S
+): Promise<WithRes<S extends true ? LoginRes : LoginValidationRes>> {
 	const res = await req("POST", "/auth/login", c, {
 		username: usr,
 		password: pwd,
 		save: save,
 	});
 	const text = await res.text();
-	const json: LoginRes = parseJSON(text);
+	const json: S extends true ? LoginRes : LoginValidationRes = parseJSON(text);
 	return [json, res];
 }
 
 export type LoginRes = Res<LoginResSuccess>;
+export type LoginValidationRes = Res<LoginValidationResSuccess>;
 
 export type LoginResSuccess = {
 	welcome: boolean | undefined;
@@ -43,6 +45,11 @@ export type LoginResSuccess = {
 		photo: string;
 		class?: number;
 	};
+};
+
+export type LoginValidationResSuccess = {
+	isGood: true;
+	response: studentAccount;
 };
 
 export function logout(c: Client) {
