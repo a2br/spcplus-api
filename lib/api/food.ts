@@ -45,11 +45,25 @@ export type MenuResSuccess = {
 	meals: Meal[];
 };
 
+export type StarGrade = 1 | 2 | 3 | 4 | 5;
+
 export async function getMeals(c: Client): Promise<WithRes<MealsRes>> {
 	const url = "/menu/meals";
 	const res = await req("GET", url, c);
 	const text = await res.text();
 	const body: MealsRes = parseJSON(text);
+	return [body, res];
+}
+
+export async function rateMeal(
+	c: Client,
+	mealId: string,
+	rating: StarGrade | null
+): Promise<WithRes<MealRatingRes>> {
+	const url = `/meals/${mealId}/rate`;
+	const res = await req("PUT", url, c, { rating });
+	const text = await res.text();
+	const body: MealRatingRes = parseJSON(text);
 	return [body, res];
 }
 
@@ -59,11 +73,16 @@ export type Meal = {
 	aliases: string[];
 	ratings: [number, number, number, number, number];
 	average: number | null;
-	rating: number | null;
+	rating: StarGrade | null;
 };
 
 export type MealsRes = Res<MealsResSuccess>;
+export type MealRatingRes = Res<MealRatingResSuccess>;
 
 export type MealsResSuccess = {
 	meals: Meal[];
+};
+
+export type MealRatingResSuccess = {
+	meal: Meal;
 };

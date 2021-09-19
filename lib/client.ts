@@ -8,7 +8,7 @@ import {
 	refresh,
 } from "./api";
 import { getClubs } from "./api";
-import { getMeals, getMenu } from "./api";
+import { getMeals, getMenu, rateMeal, StarGrade } from "./api";
 import { getSnapshots, takeSnapshot } from "./api";
 import { getUser, searchUsers } from "./api";
 import { settings } from "./util";
@@ -57,6 +57,9 @@ export default class Client {
 	}
 	getMeals() {
 		return getMeals(this);
+	}
+	rateMeal(mealId: string, rating: StarGrade | null) {
+		return rateMeal(this, mealId, rating);
 	}
 
 	getClubs() {
