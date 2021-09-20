@@ -60,7 +60,7 @@ export async function rateMeal(
 	mealId: string,
 	rating: StarGrade | null
 ): Promise<WithRes<MealRatingRes>> {
-	const url = `/meals/${mealId}/rate`;
+	const url = `/menu/meals/${mealId}/rate`;
 	const res = await req("PUT", url, c, { rating });
 	const text = await res.text();
 	const body: MealRatingRes = parseJSON(text);
