@@ -1,7 +1,7 @@
 {
-	"name": "spcgg-api",
+	"name": "spcplus-api",
 	"version": "1.0.0",
-	"description": "spcgg api client",
+	"description": "spc+ api client",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/a2br/spcgg-api.git"
