@@ -14,12 +14,10 @@
 	"scripts": {
 		"install": "npm run build",
 		"prepare": "npm run build",
-		"start": "npm run build && node dist/index.js",
-		"build": "tsc && npm run copy-dts",
+		"build": "tsc",
 		"lint": "eslint",
 		"pretty": "prettier -w .",
-		"check": "npm run pretty && npm run lint",
-		"copy-dts": "copyfiles -u 1 \"lib/**/*.d.ts\" dist"
+		"check": "npm run pretty && npm run lint"
 	},
 	"author": "a2br",
 	"license": "MIT",
