@@ -4,7 +4,7 @@
 	"description": "spc+ api client",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/a2br/spcgg-api.git"
+		"url": "git://github.com/a2br/spcplus-api.git"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
