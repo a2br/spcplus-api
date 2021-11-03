@@ -51,3 +51,41 @@ export function parseJSON(str: string): any {
 		else return val;
 	});
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function removeDates<T extends object>(obj: T): NoDates<T> {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const newObj: any = {};
+	for (const [key, val] of Object.entries(obj)) {
+		if (val instanceof Date) newObj[key] = val.toISOString();
+		else if (typeof val === "object") newObj[key] = removeDates(val);
+		else newObj[key] = val;
+	}
+	return newObj;
+}
+
+/**
+ * @description Must be used with a type assertion
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
+export function reviveDates<T extends object>(obj: T): any {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const newObj: any = {};
+	for (const [key, val] of Object.entries(obj)) {
+		if (typeof val === "string" && dateRegex.test(val))
+			newObj[key] = new Date(val);
+		else if (typeof val === "object") newObj[key] = reviveDates(val);
+		else newObj[key] = val;
+	}
+	return newObj;
+}
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type NoDates<T extends object> = {
+	[K in keyof T]: T[K] extends Date
+		? string
+		: // eslint-disable-next-line @typescript-eslint/ban-types
+		T[K] extends object
+		? NoDates<T[K]>
+		: T[K];
+};

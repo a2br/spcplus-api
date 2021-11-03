@@ -52,11 +52,11 @@ export type LoginValidationResSuccess = {
 	response: studentAccount;
 };
 
-export function logout(c: Client) {
+export function logout(c: Client): Promise<Response> {
 	return req("GET", "/auth/logout", c);
 }
 
-export function refresh(c: Client) {
+export function refresh(c: Client): Promise<Response> {
 	return req("POST", "/auth/refresh", c);
 }
 
