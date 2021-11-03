@@ -70,11 +70,12 @@ export function removeDates<T extends object>(obj: T): NoDates<T> {
 // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
 export function reviveDates<T extends object>(obj: T): any {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const newObj: any = {};
+	const newObj: any = Array.isArray(obj) ? [] : {};
 	for (const [key, val] of Object.entries(obj)) {
 		if (typeof val === "string" && dateRegex.test(val))
 			newObj[key] = new Date(val);
-		else if (typeof val === "object") newObj[key] = reviveDates(val);
+		else if (typeof val === "object" && val !== null)
+			newObj[key] = reviveDates(val);
 		else newObj[key] = val;
 	}
 	return newObj;
