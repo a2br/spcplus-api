@@ -11,6 +11,7 @@ import { getClubs } from "./api";
 import { getMeals, getMenu, rateMeal, StarGrade } from "./api";
 import { getSnapshots, takeSnapshot } from "./api";
 import { getUser, searchUsers } from "./api";
+import { getGroup, getGroups, getGroupStats } from "./api/groups";
 import { settings } from "./util";
 
 export default class Client {
@@ -48,9 +49,16 @@ export default class Client {
 	async getSnapshots(limit?: number) {
 		return getSnapshots(this, limit);
 	}
-	async getGroups() {}
-	async getGroup() {}
-	async getInvite() {}
+	async getGroups() {
+		return getGroups(this);
+	}
+	async getGroup(id: string) {
+		return getGroup(this, id);
+	}
+	async getGroupStats(id: string) {
+		return getGroupStats(this, id);
+	}
+	// async getInvite() {}
 
 	getMenu(date?: Date) {
 		return getMenu(this, date);
