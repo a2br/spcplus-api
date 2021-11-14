@@ -72,8 +72,8 @@ export async function getGroup(
 export type GroupStatsRes = Res<GroupStatsResSuccess>;
 export type GroupStatsResSuccess = { leaderboards: LeaderboardsList };
 
-type LeaderboardsList = { date: Date; leaderboard: Leaderboard }[];
-type Leaderboard = { avg: number; member: string }[];
+export type LeaderboardsList = { date: Date; leaderboard: Leaderboard }[];
+export type Leaderboard = { avg: number; member: string }[];
 
 export async function getGroupStats(
 	c: Client,
