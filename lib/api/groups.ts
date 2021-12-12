@@ -77,10 +77,16 @@ export type Leaderboard = { avg: number; member: string }[];
 
 export async function getGroupStats(
 	c: Client,
-	id: string
+	id: string,
+	periodCode?: string,
+	onlyLatest = false
 ): Promise<WithRes<GroupStatsRes>> {
 	const url = `/groups/${id}/stats`;
-	const res = await req("GET", url, c);
+	const params: string[] = [];
+	if (periodCode) params.push(`period=${periodCode}`);
+	if (onlyLatest) params.push("limit=1");
+	const fullURI = url + (params.length ? "?" + params.join("&") : "");
+	const res = await req("GET", fullURI, c);
 	const text = await res.text();
 	const body: GroupStatsRes = parseJSON(text);
 	return [body, res];
