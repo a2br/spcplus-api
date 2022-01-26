@@ -55,8 +55,13 @@ export default class Client {
 	async getGroup(id: string) {
 		return getGroup(this, id);
 	}
-	async getGroupStats(id: string, periodCode?: string, onlyLatest = true) {
-		return getGroupStats(this, id, periodCode, onlyLatest);
+	async getGroupStats(
+		id: string,
+		periodCode?: string,
+		onlyLatest = true,
+		trust = true
+	) {
+		return getGroupStats(this, id, periodCode, onlyLatest, trust);
 	}
 	// async getInvite() {}
 
