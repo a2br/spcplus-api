@@ -79,12 +79,14 @@ export async function getGroupStats(
 	c: Client,
 	id: string,
 	periodCode?: string,
-	onlyLatest = false
+	onlyLatest = false,
+	trust = true
 ): Promise<WithRes<GroupStatsRes>> {
 	const url = `/groups/${id}/stats`;
 	const params: string[] = [];
 	if (periodCode) params.push(`period=${periodCode}`);
 	if (onlyLatest) params.push("limit=1");
+	if (trust) params.push("mode=trust");
 	const fullURI = url + (params.length ? "?" + params.join("&") : "");
 	const res = await req("GET", fullURI, c);
 	const text = await res.text();
